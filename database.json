@@ -1,0 +1,16 @@
+{
+    "dev": {
+      "driver": "pg",
+      "host": "127.0.0.1",
+      "database":"storefrbk",
+      "user": "postgres",
+      "password": "E@man"
+    },
+    "test": {
+      "driver": "pg",
+      "host": "127.0.0.1",
+      "database":"storefrbktest",
+      "user": "postgres",
+      "password": "E@man"
+    }
+  }
