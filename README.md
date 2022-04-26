@@ -35,17 +35,17 @@ Also user password have been hashed by pepper bcrypt libary and using jwt token 
 
 # The env variables that I used on the Project 
 ### Enviroment variables from .env file are as the following:
-ENV=dev
-PORT=3000
-POSTGRES_HOST=127.0.0.1
-POSTGRES_PORT=5432
-POSTGRES_DB=storefrbk
-POSTGRES_DB_TEST=storefrbktest
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=E@man
-BCRYPT_PASSWORD=eman-auth-and-confirm
-TOKEN_SEC=em145an$
-SALT_ROUNDS=10
+###### ENV=dev
+###### PORT=3000
+###### POSTGRES_HOST=127.0.0.1
+###### POSTGRES_PORT=5432
+###### POSTGRES_DB=storefrbk
+###### POSTGRES_DB_TEST=storefrbktest
+###### POSTGRES_USER=postgres
+###### POSTGRES_PASSWORD=E@man
+###### BCRYPT_PASSWORD=eman-auth-and-confirm
+###### TOKEN_SEC=em145an$
+###### SALT_ROUNDS=10
 ## customerscredentials()  function which contain the following  functions:
 Create new customer credential,Aut_fun,showcustomercredentail,id_showcustomercredentail, showallcustomercredentail, updatecustomercredentailemail,updatecustomercredentailpassword,deletecustomercredential,
 
