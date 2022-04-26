@@ -112,9 +112,9 @@ const ordersmenuinfo_routes = (app: express.Application) => {
     // Show all orders info using get request
     app.get('/ordersmenuinfo', sha_or)
     // Update order quantity using put request
-    app.put('/ordersmenuinfo/credentialid/:credentialid/orderid/:id/orderquantity/:orderquantity',aut_cu, up_or)
+    app.put('/ordersmenuinfo/credentialid/:credentialid/orderid/:id/orderquantity/:orderquantity',aut_cu,up_or)
     // Delete order info with id number for order using delete request
-    app.delete('/ordersmenuinfo/credentialid/:credentialid/orderid/:id',aut_cu, del_or)
+    app.delete('/ordersmenuinfo/credentialid/:credentialid/orderid/:id',aut_cu,del_or)
    // app.delete('/ordersmenuinfo/alldelete/credentialid/:credentialid',aut_cu, del_allor)
     
   }

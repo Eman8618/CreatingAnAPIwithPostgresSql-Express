@@ -113,9 +113,9 @@ const customersmenuinfo_routes = (app: express.Application) => {
     // Show all customers info using get request
     app.get('/customersmenuinfo', sha_cu)
     // Update customer mobile using put request
-    app.put('/customersmenuinfo/credentialid/:credentialid/customerinfoid/:id/mobile/:mobile',aut_cu, up_cu)
+    app.put('/customersmenuinfo/credentialid/:credentialid/customerinfoid/:id/mobile/:mobile',aut_cu,up_cu)
     // Delete customer info with id number for customer using delete request
-    app.delete('/customersmenuinfo/credentialid/:credentialid/customerinfoid/:id',aut_cu, del_cu)
+    app.delete('/customersmenuinfo/credentialid/:credentialid/customerinfoid/:id',aut_cu,del_cu)
     // Delete all customers info
    // app.delete('/customersmenuinfo/alldelete/credentialid/:credentialid',aut_cu, del_allcu)
   }
