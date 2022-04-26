@@ -59,6 +59,7 @@ describe('Orders Menu Info  Model',()=>{
           const de_or1=await ordinfo.deleteorderinfo(Number(cr_or.id),cus_1.id);
           expect(de_or1).toBeDefined();
            })
+           /*
            // Delete all order info
       it('Delete all orders Info',async()=>{
 
@@ -68,7 +69,7 @@ describe('Orders Menu Info  Model',()=>{
         
 
         expect(de_or1).toBeDefined();
-         })
+         })*/
   })
 
 

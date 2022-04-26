@@ -27,8 +27,8 @@ ordersmenuinfo_routes(app)
 app.get('/', function (req: Request, res: Response) {
      res.send('Server is started up !')
 })
-
-app.get('/orders/:id', cors(corsOptions), function (req, res, next) {
+// For inducation of the oder come from another domain 
+app.get('/ordersmenuinfo/:id', cors(corsOptions), function (req, res, next) {
      res.json({msg: 'This is order is created from another domain'})
    })
 app.listen(3000, function () {

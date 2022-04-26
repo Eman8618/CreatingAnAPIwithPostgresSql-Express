@@ -26,18 +26,29 @@ async function createcustomercredential(email:string,username: string,password_d
   throw new Error('Something works wrongly'+`${e}`)
 }
 }
-// Authentication for existing user
+// Authentication for existing user and customer give the only the id
 async function Aut_fun(username:string,password_di:string): Promise<customercredential>{
 try{
   const sql_con= await client.connect();
   const sql_show='SELECT password_di FROM "customerscredentials" WHERE username = $1';
   const sh_res= await sql_con.query(sql_show,[username]);
-  if(sh_res.rows.length){
-    const customercredential=sh_res.rows[0];
-   if(bcrypt.compareSync(password_di+pepper,customercredential.password_di)===false){
-    //console.log(customercredential)
+  //console.log(password_di)
 
-      return customercredential
+  if(sh_res.rows.rowCount!==0){
+    const customercredential=sh_res.rows[0];
+     //console.log(password_di)
+     //console.log(customercredential.password_di)
+    //console.log(password_di===sh_res.rows[0].password_di)
+
+   if(password_di===sh_res.rows[0].password_di){
+    //console.log(customercredential)
+     
+      return customercredential;
+    }// Authentication for existing user and customer give username and password 
+
+    else if(bcrypt.compareSync(password_di+pepper,customercredential.password_di)){
+      return customercredential;
+
     }else {
       throw new Error('Invalid Authorization password');
     }
@@ -104,30 +115,40 @@ async function showallcustomercredentail(): Promise<customercredential>
   }
   
 }
-
+// Update email of customer credentil 
 async function updatecustomercredentailemail(username: string,newemail:string): Promise<customercredential>
  {
+  
+
   try{
   const sql_con= await client.connect();
-  const sql_update='UPDATE "customerscredentials" SET email=$2 WHERE username = $1 RETURNING id,username,password_di';
+  const sql_update='UPDATE "customerscredentials" SET email=$2 WHERE username = $1 RETURNING id,username,email';
   const update_res = await sql_con.query(sql_update,[username,newemail]);
   sql_con.release();
-  if (update_res.rowCount===0) {
-    throw new Error(`Customer credential cannot be updates password for ${username} `);
-  }
-  //console.log(update_res.rows[0])
-  return update_res.rows[0];
+ // console.log(update_res.rows[0])
+if (update_res.rowCount === 0) {
+  throw new Error(`Customer credential cannot be updates password for ${username} `);
+}
+//console.log(update_res.rows[0])
+return update_res.rows[0];
 }catch(e:unknown){
     throw new Error('Something works wrongly'+`${e}`)
   }
 }
+ 
 
+
+
+ 
+
+// Update Password for customer credential
 async function updatecustomercredentailpassword(username: string,newps:string): Promise<customercredential>
  {
   try{
   const sql_con= await client.connect();
   const sql_update='UPDATE "customerscredentials" SET password_di=$2 WHERE username = $1 RETURNING id,username,password_di';
-  const update_res = await sql_con.query(sql_update,[username,newps]);
+  const h_Ps= bcrypt.hashSync(newps+ pepper, Number(process.env.SALT_ROUNDS));
+  const update_res = await sql_con.query(sql_update,[username,h_Ps]);
   sql_con.release();
   if (update_res.rowCount === 0) {
     throw new Error(`Customer credential cannot be updates password for ${username} `);
@@ -169,7 +190,7 @@ async function delete_allcustomercredential(_id:Number): Promise<customercredent
 export function customerscredentials() {
   return {
     createcustomercredential,
-    Aut_fun,
+    Aut_fun,// Authentiction when given only customer credential id or give user name and password
     showcustomercredentail,
     id_showcustomercredentail,
     showallcustomercredentail,

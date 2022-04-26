@@ -12,9 +12,10 @@ const jwt = require("jsonwebtoken");
 const ne_c=cu_cred.createcustomercredential('ew@gmail.com','Eman_7','tyu');
 
 describe('Authentication and authorization function',()=>{
+    /*
     beforeAll(function() {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL=5000;
-    });
+        jasmine.DEFAULT_TIMEOUT_INTERVAL=10000;
+    });*/
     it('Determine if customer is authoized  to login',()=>{
     const aut_cu= async(req: Request, res: Response ,next:NextFunction) => {
     try{

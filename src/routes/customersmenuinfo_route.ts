@@ -1,7 +1,7 @@
 import express, { Router } from 'express'
 import { Request } from 'express'
 import { Response } from 'express'
-import aut_cu from '../middleware/aut_cu'
+import {aut_cu} from '../middleware/aut_cu'
 const jwt = require("jsonwebtoken");
 
 
@@ -87,6 +87,7 @@ const del_cu= async(req: Request, res: Response) => {
       // Not Found
   }
 }
+/*
 // Delete Customer with all
 const del_allcu= async(req: Request, res: Response) => {
     try{
@@ -101,7 +102,7 @@ const del_allcu= async(req: Request, res: Response) => {
       //console.log(`${e}`)
       // Not Found
   }
-}
+}*/
 
 
 const customersmenuinfo_routes = (app: express.Application) => {
@@ -116,7 +117,7 @@ const customersmenuinfo_routes = (app: express.Application) => {
     // Delete customer info with id number for customer using delete request
     app.delete('/customersmenuinfo/credentialid/:credentialid/customerinfoid/:id',aut_cu, del_cu)
     // Delete all customers info
-    app.delete('/customersmenuinfo/alldelete/credentialid/:credentialid',aut_cu, del_allcu)
+   // app.delete('/customersmenuinfo/alldelete/credentialid/:credentialid',aut_cu, del_allcu)
   }
   
 export default customersmenuinfo_routes

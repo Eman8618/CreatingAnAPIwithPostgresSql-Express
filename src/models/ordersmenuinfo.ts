@@ -97,6 +97,7 @@ async function createorderinfo(
         throw new Error(`Order info cannot be deleted ${id}:${e}.`)
       }
     }
+    /*
      // Delete all
 async function delete_allorderinfo(_credentialid:Number): Promise<orderinfo> {
   try{
@@ -108,7 +109,7 @@ async function delete_allorderinfo(_credentialid:Number): Promise<orderinfo> {
   }catch(e:unknown){
     throw new Error(`Customer cannot be deleted all orders info.${e}`)
   }
-}
+}*/
     export function ordersmenuinfo() {
       return {
         createorderinfo,
@@ -116,7 +117,7 @@ async function delete_allorderinfo(_credentialid:Number): Promise<orderinfo> {
         showallorderinfo,
         updateorderinfo,
         deleteorderinfo,
-        delete_allorderinfo
+     //   delete_allorderinfo
         };
     }
   

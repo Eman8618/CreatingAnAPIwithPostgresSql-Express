@@ -44,7 +44,7 @@ describe('URL Test of REST API as an endpoint responses for productsmenuinfo_rou
     it('Getting URL of the API endpoint for delete exist product info with id', async () => {
         //Defining an Endpoint response that delete the exist product info data of an API 
 
-        const res = await req.delete('/productsmenuinfo/credentialid/17/productinfoid/6'); 
+        const res = await req.delete('/productsmenuinfo/credentialid/10/productinfoid/1'); 
         //Expect results for the test
         expect(res.status).toBe(200);
     })

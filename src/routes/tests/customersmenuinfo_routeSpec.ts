@@ -33,20 +33,21 @@ describe('URL Test of REST API as an endpoint responses for customersmenuinfo_ro
 
     it('Getting URL of the API endpoint for update the exist mobile number for customer info', async () => {
         //Defining an Endpoint response that update the exist mobile number for customer info data of an API 
-        const res = await req.put('/customersmenuinfo/credentialid/14/customerinfoid/1/mobile/0156734672'); 
+        const res = await req.put('/customersmenuinfo/credentialid/6/customerinfoid/2/mobile/0156734672'); 
         //Expect results for the test
         expect(res.status).toBe(200);
     })
     it('Getting URL of the API endpoint for delete exist customer info with id', async () => {
         //Defining an Endpoint response that delete the exist customer info data of an API 
-        const res = await req.delete('/customersmenuinfo/credentialid/1/customerinfoid/1'); 
+        const res = await req.delete('/customersmenuinfo/credentialid/6/customerinfoid/2'); 
         //Expect results for the test
         expect(res.status).toBe(200);
     })
+    /*
     it('Getting URL of the API endpoint for delete all customers info', async () => {
         //Defining an Endpoint response that delete all customers info data of an API 
         const res = await req.delete('/customersmenuinfo/alldelete/credentialid/1'); 
         //Expect results for the test
         expect(res.status).toBe(200);
-    })
+    })*/
 });

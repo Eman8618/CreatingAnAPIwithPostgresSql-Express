@@ -2,11 +2,13 @@ import { Request}from 'express'
 import {Response } from 'express'
 import { NextFunction } from 'express';
 import {customerscredentials} from '../models/customerscredentials'
-import { customersmenuinfo } from '../models/customersmenuinfo';
+//import { customersmenuinfo } from '../models/customersmenuinfo';
 const cu_cred=customerscredentials()
 const jwt = require("jsonwebtoken");
+//const bcrypt=require("bcrypt")
+//const pepper=require("salt")
 
-const aut_cu= async(req: Request, res: Response ,next:NextFunction) => {
+export const aut_cu= async(req: Request, res: Response ,next:NextFunction) => {
     try{
         const credetialid=req.params.credentialid
         //console.log(credetialid)
@@ -32,4 +34,5 @@ const aut_cu= async(req: Request, res: Response ,next:NextFunction) => {
     // Not Found
   }
 }
-export default aut_cu
+
+

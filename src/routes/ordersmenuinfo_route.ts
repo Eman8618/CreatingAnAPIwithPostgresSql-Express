@@ -1,7 +1,7 @@
 import express, { Router } from 'express'
 import { Request } from 'express'
 import { Response } from 'express'
-import aut_cu from '../middleware/aut_cu'
+import {aut_cu} from '../middleware/aut_cu'
 
 import {ordersmenuinfo} from '../models/ordersmenuinfo'
 const or_info=ordersmenuinfo()
@@ -75,6 +75,8 @@ const del_or= async(req: Request, res: Response) => {
     try{
         const or_id=req.params.id;
         const credentialid=req.params.credentialid;
+        console.log(or_id)
+        console.log(credentialid)
     const cus_d = await or_info.deleteorderinfo(Number(or_id),Number(credentialid));
     //console.log(cus_d)
     res.json(cus_d)
@@ -85,6 +87,7 @@ const del_or= async(req: Request, res: Response) => {
       // Not Found
   }
 }
+/*
 // Delete all Orders 
 const del_allor= async(req: Request, res: Response) => {
     try{       
@@ -100,7 +103,7 @@ const del_allor= async(req: Request, res: Response) => {
       // Not Found
   }
 }
-
+*/
 const ordersmenuinfo_routes = (app: express.Application) => {
     // Create new order with post request
     app.post('/ordersmenuinfo/credentialid/:credentialid/orderquantity/:orderquantity/purchasedate/:purchasedate/activeorder/:activeorder/customerid/:customerid/productid/:productid',aut_cu,cr_or)
@@ -112,7 +115,7 @@ const ordersmenuinfo_routes = (app: express.Application) => {
     app.put('/ordersmenuinfo/credentialid/:credentialid/orderid/:id/orderquantity/:orderquantity',aut_cu, up_or)
     // Delete order info with id number for order using delete request
     app.delete('/ordersmenuinfo/credentialid/:credentialid/orderid/:id',aut_cu, del_or)
-    app.delete('/ordersmenuinfo/alldelete/credentialid/:credentialid',aut_cu, del_allor)
+   // app.delete('/ordersmenuinfo/alldelete/credentialid/:credentialid',aut_cu, del_allor)
     
   }
   

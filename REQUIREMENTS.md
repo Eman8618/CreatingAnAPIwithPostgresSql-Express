@@ -62,8 +62,6 @@ http://localhost:3000/customerscredentials/username/:username/email/:email
 http://localhost:3000/customerscredentials/username/:username/password_di/:password_di
 #### For delete customer credential with id using delete request
 http://localhost:3000/customerscredentials/id/:id
-#### For delete all  customers credential
- http://localhost:3000/customerscredentials/alldelete
 
 ## For customer menu info routes 
 #### For create new customer menu info using post request
@@ -76,8 +74,7 @@ http://localhost:3000/customersmenuinfo
 http://localhost:3000/customersmenuinfo/credentialid/:credentialid/customerinfoid/:id/mobile/:mobile
 #### For delete customer info with id
 http://localhost:3000/customersmenuinfo/credentialid/:credentialid/customerinfoid/:id
-#### For delete all customer info 
-http://localhost:3000/customersmenuinfo/alldelete/credentialid/:credentialid
+
 
 ## For Product menu info routes
 #### For create new product menu info using post request
@@ -90,8 +87,7 @@ http://localhost:3000/productsmenuinfo
 http://localhost:3000/productsmenuinfo/credentialid/:credentialid/productinfoid/:id/price/:price
 #### For delete product  info with id using delete
 http://localhost:3000/productsmenuinfo/credentialid/:credentialid/productinfoid/:id
-#### For delete all products 
-http://localhost:3000/productsmenuinfo/alldelete/credentialid/:credentialid
+
 
 ## For Order menu info routes
 #### For create new order menu info using post request
@@ -104,9 +100,21 @@ http://localhost:3000/ordersmenuinfo
 http://localhost:3000/ordersmenuinfo/credentialid/:credentialid/orderid/:id/orderquantity/:orderquantity
 #### For delete order info with id
 http://localhost:3000/ordersmenuinfo/credentialid/:credentialid/orderid/:id
+
+
+##### Finally note that  I marked them as comments because I donot like to apply them on tests The routing of all delete 
+
 #### For delete all orders
 http://localhost:3000/ordersmenuinfo/alldelete/credentialid/:credentialid
 
+#### For delete all products 
+http://localhost:3000/productsmenuinfo/alldelete/credentialid/:credentialid
+
+#### For delete all customer info 
+http://localhost:3000/customersmenuinfo/alldelete/credentialid/:credentialid
+
+#### For delete all  customers credential
+ http://localhost:3000/customerscredentials/alldelete
 
 
 

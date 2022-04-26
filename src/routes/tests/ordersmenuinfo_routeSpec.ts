@@ -9,9 +9,9 @@ const req = supertest(app);
 describe('URL Test of REST API as an endpoint responses for ordersmenuinfo_route', () => {
     it('Getting URL of the API endpoint for create new orders info', async () => {
         //Defining an Endpoint response that posts the new order info data of an API 
-        const res1 = await req.post('/productsmenuinfo/credentialid/17/productname/rice/price/200/category/food/productioncountry/EGYPT'); 
+        const res1 = await req.post('/productsmenuinfo/credentialid/16/productname/rice/price/200/category/food/productioncountry/EGYPT'); 
 
-        const res = await req.post('/ordersmenuinfo/credentialid/21/orderquantity/3/purchasedate/2022-4-10/activeorder/true/customerid/9/productid/10')
+        const res = await req.post('/ordersmenuinfo/credentialid/17/orderquantity/3/purchasedate/2022-4-10/activeorder/true/customerid/9/productid/10')
         //Show order info with id number for customer using get request'); 
         //Expect results for the test
         expect(res.status).toBe(200);
@@ -20,10 +20,8 @@ describe('URL Test of REST API as an endpoint responses for ordersmenuinfo_route
     it('Getting URL of the API endpoint for show exist order info with id', async () => {
         //Defining an Endpoint response that get the exist order info data of an API 
         const res = await req.get('/ordersmenuinfo/id/1'); 
-        const res1 = await req.get('/ordersmenuinfo'); 
-        const res_b=(res.status&&res1.status)
         //Expect results for the test
-        expect(res_b).toBe(200);
+        expect(res.status).toBe(200);
     })
     
     it('Getting URL of the API endpoint for show all orders info', async () => {
@@ -33,18 +31,18 @@ describe('URL Test of REST API as an endpoint responses for ordersmenuinfo_route
         expect(res.status).toBe(200);
     })
 
-
     it('Getting URL of the API endpoint for update the exist quantity number for order info', async () => {
         //Defining an Endpoint response that update the exist quantity number for order info data of an API 
-        
-        const res = await req.put('/ordersmenuinfo/credentialid/21/orderid/5/orderquantity/6'); 
+        const res = await req.put('/ordersmenuinfo/credentialid/16/orderid/2/orderquantity/12'); 
         //Expect results for the test
         expect(res.status).toBe(200);
     })
-    it('Getting URL of the API endpoint for delete exist product info with id', async () => {
+
+    
+    it('Getting URL of the API endpoint for delete exist order info with id', async () => {
         //Defining an Endpoint response that delete the exist order info data of an API 
 
-        const res = await req.delete('/ordersmenuinfo/credentialid/21/orderid/5'); 
+        const res = await req.delete('/ordersmenuinfo/credentialid/16/orderid/2'); 
         //Expect results for the test
         expect(res.status).toBe(200);
     })

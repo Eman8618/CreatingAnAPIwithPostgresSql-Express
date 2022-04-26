@@ -2,7 +2,7 @@ import express, { Router } from 'express'
 import { Request } from 'express'
 import { Response } from 'express'
 const jwt = require("jsonwebtoken");
-import aut_cu from '../middleware/aut_cu'
+import {aut_cu} from '../middleware/aut_cu'
 
 import {productsmenuinfo} from '../models/n_productsmenuinfo'
 const pro_info=productsmenuinfo()
@@ -85,6 +85,7 @@ const del_pro= async(req: Request, res: Response) => {
       // Not Found
   }
 }
+/*
 // Delete all Product 
 const del_allpro= async(req: Request, res: Response) => {
     try{
@@ -99,7 +100,7 @@ const del_allpro= async(req: Request, res: Response) => {
       //console.log(`${e}`)
       // Not Found
   }
-}
+}*/
 
 const productsmenuinfo_routes = (app: express.Application) => {
     // Create new product with post request
@@ -113,7 +114,7 @@ const productsmenuinfo_routes = (app: express.Application) => {
     // Delete product info with id number for customer using delete request
     app.delete('/productsmenuinfo/credentialid/:credentialid/productinfoid/:id',aut_cu,del_pro)
     // Delete all products using delete request
-    app.delete('/productsmenuinfo/alldelete/credentialid/:credentialid',aut_cu,del_allpro)
+   //app.delete('/productsmenuinfo/alldelete/credentialid/:credentialid',aut_cu,del_allpro)
   }
   
 export default productsmenuinfo_routes

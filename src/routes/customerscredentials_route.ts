@@ -1,11 +1,14 @@
-import express, { Router } from 'express'
+import express, { NextFunction, Router } from 'express'
 import { Request } from 'express'
 import { Response } from 'express'
 //const bcrypt=require("bcrypt")
 const jwt = require("jsonwebtoken");
 //const pepper=require("salt");
 import {customerscredentials} from '../models/customerscredentials'
-import aut_cu from '../middleware/aut_cu'
+import {aut_cu} from '../middleware/aut_cu'
+import { nextTick } from 'process';
+const bcrypt=require("bcrypt")
+const pepper=require("salt")
 
 const cu_cred=customerscredentials()
 
@@ -31,14 +34,16 @@ const cr_cred=async(req:Request,res:Response)=>{
 }
 }
 // Authorize a customer credential with username
-const au_cu= async(req: Request, res: Response) => {
+const au_cu= async(req: Request, res: Response,next:NextFunction) => {
     try{
         const cus_user=req.params.username ;
         const  cus_ps=req.params.password_di ;
         const cus_au = await cu_cred.Aut_fun(cus_user,cus_ps);
         const token_s=jwt.sign(cus_au,process.env.TOKEN_SEC)
-        res.json({cu_to:{cus_user,cus_ps,token_s}})
-        
+        const h_cus_ps=bcrypt.hashSync(cus_ps+ pepper, Number(process.env.SALT_ROUNDS));
+
+        res.json({cu_to:{cus_user,h_cus_ps,token_s}})
+        next()
         
   }catch(e)
   {
@@ -48,6 +53,10 @@ const au_cu= async(req: Request, res: Response) => {
   }
 }
 // 
+// Authorize a customer credential with username
+
+     
+
 // Show a customer credential with username
 const sh_cucr= async(req: Request, res: Response) => {
     try{
@@ -87,11 +96,13 @@ const sha_cu= async(req: Request, res: Response) => {
       // Not Found
   }
 }
-// Update email number for customer with username 
+// Update email  for customer with username 
 const up_cu_em= async(req: Request, res: Response) => {
     try{
         const cus_username=req.params.username;
+        //const cus_ps=req.params.password_di;
         const cus_newemail=req.params.email;
+        //console.log(cus_newemail)
         const cus_s = await cu_cred.updatecustomercredentailemail(cus_username,cus_newemail);
         res.json(cus_s)
   }catch(e)
@@ -105,6 +116,8 @@ const up_cu_ps= async(req: Request, res: Response) => {
     try{
         const cus_username=req.params.username;
         const cus_newpass=req.params.password_di;
+        //const cus_newpass=req.params.newps;
+
         const cus_s = await cu_cred.updatecustomercredentailpassword(cus_username,cus_newpass);
         res.json(cus_s)
   }catch(e)
@@ -119,6 +132,8 @@ const up_cu_ps= async(req: Request, res: Response) => {
 // Delete Customer with id 
 const delcr_cu= async(req: Request, res: Response) => {
     try{
+        //const cus_username=req.params.username;
+        //const cus_ps=req.params.password_di;
         const cus_id=req.params.id;
     const cus_d = await cu_cred.deletecustomercredential(Number(cus_id));
     //console.log(cus_d)
@@ -130,6 +145,7 @@ const delcr_cu= async(req: Request, res: Response) => {
       // Not Found
   }
 }
+/*
 // Delete all
 const delcr_allcu= async(req: Request, res: Response) => {
     try{
@@ -144,7 +160,7 @@ const delcr_allcu= async(req: Request, res: Response) => {
       // Not Found
   }
 }
-
+*/
 
 const customerscredentnails_routes = (app: express.Application) => {
     // Create new customer with post request
@@ -158,13 +174,13 @@ const customerscredentnails_routes = (app: express.Application) => {
     // Show all customers credentials using get request
     app.get('/customerscredentials', sha_cu)
     // Update password for customer credential using put request
-    app.put('/customerscredentials/username/:username/email/:email',au_cu, up_cu_em)
+    app.put('/customerscredentials/username/:username/email/:email',up_cu_em)
     // Update password for customer credential using put request
-    app.put('/customerscredentials/username/:username/password_di/:password_di',au_cu, up_cu_ps)
+    app.put('/customerscredentials/username/:username/password_di/:password_di/email/:email',up_cu_ps)
     // Delete customer credential with id number for customer using delete request
-    app.delete('/customerscredentials/id/:id',au_cu, delcr_cu)
+    app.delete('/customerscredentials/id/:id',delcr_cu)
     // Delete all custmers credentials 
-    app.delete('/customerscredentials/alldelete',au_cu,delcr_allcu)
+    //app.delete('/customerscredentials/alldelete',delcr_allcu)
 
   
   }

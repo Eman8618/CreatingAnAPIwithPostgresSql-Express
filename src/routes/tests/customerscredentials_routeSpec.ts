@@ -3,8 +3,16 @@ import { randomInt } from 'crypto';
 import supertest from 'supertest';
 // Importing app from index.ts file
 import app from "../../server"
+import {customerscredentials} from '../../models/customerscredentials' 
+const cu_cred=customerscredentials()
+/*
+const ne_c=cu_cred.createcustomercredential('eqw@gmail.com','Eman_74','t2yu#');
+const ne_c2=cu_cred.createcustomercredential('eqw1@gmail.com','Eman_741','4t2yu#');
+*/
+
 // Define request as supertest of app
 const req = supertest(app);
+
 
 // Describe the test
 describe('URL Test of REST API as an endpoint responses for customerscredential_route', () => {
@@ -16,15 +24,14 @@ describe('URL Test of REST API as an endpoint responses for customerscredential_
     })
     it('Getting URL of the API endpoint for authantiction and authorization of exist customer credential', async () => {
         //Defining an Endpoint response that posts for authanication the customer credential data of an API 
-        const res1 = await req.post('/customerscredentials/email/e417@gmail.com/username/Eman350/password_di/yu7833') 
 
-        const res = await req.post('/auth/username/Eman/password_di/er2344')
+        const res = await req.post('/auth/username/Eman345/password_di/yu678')
         //Expect results for the test
         expect(res.status).toBe(200);
     })
     it('Getting URL of the API endpoint for show exist customer credential with id', async () => {
         //Defining an Endpoint response that get the exist customer credential data of an API 
-        const res = await req.get('/customerscredentials/id/21'); 
+        const res = await req.get('/customerscredentials/id/1'); 
         //Expect results for the test
         expect(res.status).toBe(200);
     })
@@ -46,31 +53,34 @@ describe('URL Test of REST API as an endpoint responses for customerscredential_
     it('Getting URL of the API endpoint for update exist email for customer  credential', async () => {
         //Defining an Endpoint response that update the exist customer credential data of an API 
         
-            const res = await req.put('/customerscredentials/username/Eman345/email/ew@gmail.com');
+            const res = await req.put('/customerscredentials/username/Eman345/password_di/yu678/email/ew@gmail.com');
             //Expect results for the test
          expect(res.status).toBe(200);
        
     })
     it('Getting URL of the API endpoint for update the exist password customer credential', async () => {
         //Defining an Endpoint response that update the exist customer credential data of an API 
-        const res = await req.put('/customerscredentials/username/Eman345/password_di/er466'); 
+        const res = await req.put('/customerscredentials/username/Eman345/password_di/er466/email/ew@gmail.com'); 
         //Expect results for the test
         expect(res.status).toBe(200);
     })
     it('Getting URL of the API endpoint for delete exist customer credential with id', async () => {
         //Defining an Endpoint response that delete the exist customer credential data of an API 
-        const res = await req.delete('/customerscredentials/id/13'); 
+        /*const id1=(await ne_c2).id
+        console.log(id1)*/
+       // console.log(`/customerscredentials/id/`)
+        const res = await req.delete(`/customerscredentials/id/1`); 
         //Expect results for the test
         expect(res.status).toBe(200);
     })
     /*
     it('Getting URL of the API endpoint for delete all customers credentials ', async () => {
-
+         console.log(`/customerscredentials/alldelete/credentialid/${Number((await ne_c).id)}`);
         //Defining an Endpoint response that delete all customers credential data of an API 
-        const res = await req.delete('/customerscredentials/alldelete/credentialid/20'); 
+        const res = await req.delete(`/customerscredentials/alldelete/credentialid/${Number((await ne_c).id)}`); 
         //Expect results for the test
         expect(res.status).toBe(200);
-    })*/
-
+    })
+*/
 
 });

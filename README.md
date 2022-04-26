@@ -2,7 +2,7 @@
 #### This project is created with the assistance of the starter project and contents of lessons that are
 #### provided from Udacity. I organized the routes and models as functions according to live 
 #### sessions from our leader 
-store have customer credentail to user to can add or update or delete any of products , and orders so if the doesn't have credential id then he cannot have permission for create ,update ,delete .
+store have customer credentail to user to can add or update or delete any of products , and orders so if the user doesn't have credential id then he cannot have permission for create ,update ,delete .
 Also user password have been hashed by pepper bcrypt libary and using jwt token for verify it  
 ## For install packages that is used 
 #####    npm install
@@ -27,7 +27,7 @@ Also user password have been hashed by pepper bcrypt libary and using jwt token 
 ###### npm run test-server-proj2
 ###### For testing of the storefrbktest database in test mode 
 ####   npm run test-test
-###### For testing of the storefrbk database in dev mode
+#### For testing of the storefrbk database in dev mode
 ####   npm run test-dev
 ####   For run eslint & prettier server 
 ###### npm run lint-f-proj2
@@ -47,7 +47,7 @@ BCRYPT_PASSWORD=eman-auth-and-confirm
 TOKEN_SEC=em145an$
 SALT_ROUNDS=10
 ## customerscredentials()  function which contain the following  functions:
-Create new customer credential,Aut_fun,showcustomercredentail,id_showcustomercredentail, showallcustomercredentail, updatecustomercredentailemail,updatecustomercredentailpassword,deletecustomercredential,delete_allcustomercredential
+Create new customer credential,Aut_fun,showcustomercredentail,id_showcustomercredentail, showallcustomercredentail, updatecustomercredentailemail,updatecustomercredentailpassword,deletecustomercredential,
 
 ## customersmenuinfo() function which contain the following  functions:
 createcustomerinfo,showcustomerinfo,showallcustomerinfo,updatecustomerinfo,deletecustomerinfo
@@ -58,9 +58,9 @@ createproductinfo,showproductinfo,updateproductinfo,showallproductinfo,deletepro
 ## ordersmenuinfo() function which contain the following function
 createorderinfo,showorderinfo,showallorderinfo,updateorderinfo,deleteorderinfo,
 
+Note that all delete functions I marked them as comments as I donot use them on tests
 
-
-
+functions are : delete_allcustomercredential ,delete_allcustomerinfo,delete_allproductinfo,delete_allorderinfo
 
 ## The original content 
 ## Getting Started
