@@ -25,10 +25,10 @@ Also user password have been hashed by pepper bcrypt libary and using jwt token 
 ###### npm run start-server-proj2
 ####   For test server 
 ###### npm run test-server-proj2
-###### For testing of the storefrbktest database in test mode 
-####   npm run test-test
+#### For testing of the storefrbktest database in test mode 
+######  npm run test-test
 #### For testing of the storefrbk database in dev mode
-####   npm run test-dev
+######   npm run test-dev
 ####   For run eslint & prettier server 
 ###### npm run lint-f-proj2
 ###### npm run prettier-f-proj2
