@@ -59,7 +59,7 @@ http://localhost:3000/customerscredentials
 #### For Update customer credential email using put request
 http://localhost:3000/customerscredentials/username/:username/email/:email
 #### For Update customer credential password using put request 
-http://localhost:3000/customerscredentials/username/:username/password_di/:password_di
+http://localhost:3000/customerscredentials/username/:username/password_di/:password_di/email/:email
 #### For delete customer credential with id using delete request
 http://localhost:3000/customerscredentials/id/:id
 
