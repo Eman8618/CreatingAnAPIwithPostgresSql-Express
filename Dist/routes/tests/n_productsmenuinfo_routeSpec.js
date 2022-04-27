@@ -22,14 +22,12 @@ describe('URL Test of REST API as an endpoint responses for productsmenuinfo_rou
     it('Getting URL of the API endpoint for show exist product info with id', async () => {
         //Defining an Endpoint response that get the exist product info data of an API 
         const res = await req.get('/productsmenuinfo/id/4');
-        const res1 = await req.get('/productsmenuinfo');
-        const res_b = (res.status && res1.status);
         // console.log(res_b)
         //Expect results for the test
-        expect(res_b).toBe(200);
+        expect(res.status).toBe(200);
     });
     it('Getting URL of the API endpoint for show all products info', async () => {
-        //Defining an Endpoint response that get all poducts info data of an API 
+        //Defining an Endpoint response that get all products info data of an API 
         const res = await req.get('/productsmenuinfo');
         //Expect results for the test
         expect(res.status).toBe(200);

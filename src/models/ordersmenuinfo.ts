@@ -4,24 +4,30 @@ export type orderinfo={
     credentialid:Number;
     orderquantity:Number,
     purchasedate:Date, 
-    onlinepayment:Boolean,
+    activeorder:Boolean,
     customerid:Number,
     productid:Number
+};
+export type add_new_product={
+credentialid:Number,
+ordercartid:Number,
+productid:Number,
+productquantity:Number,
+
 };
 //Create new order info
 async function createorderinfo(
     credentialid:Number,
-    orderquantity:Number,
+   // orderquantity:Number,
     purchasedate:Date, 
     activeorder:Boolean,
     customerid:Number,
-    productid:Number
     ): Promise<orderinfo> {
       try{
       const sql_con= await client.connect();
       
-      const sql_create='INSERT INTO "ordersmenuinfo" (credentialid,orderquantity,purchasedate,activeorder,customerid,productid) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id,customerid,productid ,purchasedate';
-      const create_res= await sql_con.query(sql_create,[credentialid,orderquantity,purchasedate,activeorder,customerid,productid]);
+      const sql_create='INSERT INTO "ordersmenuinfo" (credentialid,purchasedate,activeorder,customerid) VALUES ($1,$2,$3,$4) RETURNING *';
+      const create_res= await sql_con.query(sql_create,[credentialid,purchasedate,activeorder,customerid]);
       sql_con.release();
       //console.log(create_res.rows[0])
       return create_res.rows[0];
@@ -29,7 +35,45 @@ async function createorderinfo(
       throw new Error(`Something works wrongly :${e}`)
     }
     }
+//Add new product to exist order info
+async function add_new_product_to_order(
+  //credentialid:Number,
+  ordercartid:Number,
+  productid:Number,
+  productquantity:Number,
+
+  ): Promise<add_new_product> {
+    try{
+    const sql_con= await client.connect();
     
+    const sql_create='INSERT INTO "orderproductscart" (ordercartid,productid,productquantity) VALUES ($1,$2,$3) RETURNING *';
+    const createnewpr_res= await sql_con.query(sql_create,[ordercartid,productid,productquantity]);
+    sql_con.release();
+    //console.log(create_res.rows[0])
+    return createnewpr_res.rows[0];
+  }catch(e:unknown){
+    throw new Error(`Something works wrongly :${e}`)
+  }
+  }   
+  // Show orderproductlist info
+  async function showorderproductlist(id:Number): Promise<add_new_product>
+  {
+   try{
+   const sql_con= await client.connect();
+   const sql_show='SELECT * FROM "orderproductscart" WHERE id= $1';
+   const show_res = await sql_con.query(sql_show,[id]);
+   sql_con.release();
+   //console.log(show_res.rows[0])
+   if (show_res.rowCount === 0) {
+     throw new Error("Cannot find products on this order");
+   }
+   return show_res.rows[0];
+ }catch(e:unknown){
+     throw new Error(`Something works wrongly :${e}`)
+   }
+ }
+
+
     // Show order info
     async function showorderinfo(id:Number): Promise<orderinfo>
      {
@@ -67,25 +111,10 @@ async function createorderinfo(
       
     }
     
-    // update order quantity for order info 
+      
+    // Delete order info
     
-    async function updateorderinfo(id:Number,_credentialid:Number,ne_orqu:Number): Promise<orderinfo>
-     {
-      try{
-      const sql_con= await client.connect();
-      const sql_update='UPDATE "ordersmenuinfo" SET orderquantity=$2 WHERE id = $1 RETURNING *';
-      const update_res = await sql_con.query(sql_update,[id,ne_orqu]);
-      sql_con.release();
-      //console.log(update_res.rows[0])
-      if (update_res.rowCount === 0) {
-        throw new Error(`Customer info cannot be updated price for product with ${id} `)
-      }
-      return update_res.rows[0];
-    }catch(error:unknown){
-        throw new Error(`Something works wrongly :${error}`)
-      }
-    }
-    // Delete order info 
+
     async function deleteorderinfo(id:number,_credentialid:Number): Promise<orderinfo> {
       try{
         const sql_con= await client.connect();
@@ -97,7 +126,7 @@ async function createorderinfo(
         throw new Error(`Order info cannot be deleted ${id}:${e}.`)
       }
     }
-    /*
+    
      // Delete all
 async function delete_allorderinfo(_credentialid:Number): Promise<orderinfo> {
   try{
@@ -109,15 +138,17 @@ async function delete_allorderinfo(_credentialid:Number): Promise<orderinfo> {
   }catch(e:unknown){
     throw new Error(`Customer cannot be deleted all orders info.${e}`)
   }
-}*/
+}
     export function ordersmenuinfo() {
       return {
         createorderinfo,
+        add_new_product_to_order,
+        showorderproductlist,
         showorderinfo,
         showallorderinfo,
-        updateorderinfo,
+        //updateorderinfo,
         deleteorderinfo,
-     //   delete_allorderinfo
+        delete_allorderinfo
         };
     }
   

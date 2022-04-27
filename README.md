@@ -2,8 +2,11 @@
 #### This project is created with the assistance of the starter project and contents of lessons that are
 #### provided from Udacity. I organized the routes and models as functions according to live 
 #### sessions from our leader 
-store have customer credentail to user to can add or update or delete any of products , and orders so if the user doesn't have credential id then he cannot have permission for create ,update ,delete .
-Also user password have been hashed by pepper bcrypt libary and using jwt token for verify it  
+store have customer credentail to user to can add or update or delete any of products , and orders so if the user doesn't have credential id then he cannot have permission for create ,update ,delete . For order it can be created first then adding new products for active order only
+Also user password have been hashed by pepper bcrypt libary and using jwt token for verify it 
+ 
+## Port, at which database server : 5432 and express backend server is running on port : 3000 
+
 ## For install packages that is used 
 #####    npm install
 ## Scripts for run the project
@@ -25,9 +28,10 @@ Also user password have been hashed by pepper bcrypt libary and using jwt token 
 ###### npm run start-server-proj2
 ####   For test server 
 ###### npm run test-server-proj2
-#### For testing of the storefrbktest database in test mode 
+### Note that Test mode command also createtestdb & at the end it drop this database
+#### For testing of the storefrbktest database in test mode with migration up and down 
 ######  npm run test-test
-#### For testing of the storefrbk database in dev mode
+#### For testing of the storefrbk database in dev mode with migration up and down 
 ######   npm run test-dev
 ####   For run eslint & prettier server 
 ###### npm run lint-f-proj2

@@ -97,6 +97,7 @@ async function createproductinfo(
         throw new Error(`Customer info cannot be deleted ${id}:${e}.`)
       }
     }
+    /*
     // Delete all products info 
     async function delete_allproductinfo(_credentialid:Number): Promise<productinfo> {
       try{
@@ -108,15 +109,15 @@ async function createproductinfo(
       }catch(e:unknown){
         throw new Error(`Customer cannot be deleted all products info.${e}`)
       }
-    }
+    }*/
     export function productsmenuinfo() {
       return {
         createproductinfo,
         showproductinfo,
         updateproductinfo,
         showallproductinfo,
-        deleteproductinfo,
-        delete_allproductinfo    
+        deleteproductinfo
+      //  delete_allproductinfo    
           };
     }
   

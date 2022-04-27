@@ -153,19 +153,21 @@ async function deletecustomercredential(id) {
         throw new Error(`Customer cannot be deleted ${id}.${e}`);
     }
 }
+/*
 // Delete all
-async function delete_allcustomercredential(_id) {
-    try {
-        const sql_con = await database_1.default.connect();
-        const sql_delete_all = 'DELETE  FROM "customerscredentials" ';
-        const delete_res = await sql_con.query(sql_delete_all);
-        sql_con.release();
-        return delete_res;
-    }
-    catch (e) {
-        throw new Error(`Customer cannot be deleted all customers credential.${e}`);
-    }
+async function delete_allcustomercredential(_id:Number): Promise<customercredential> {
+  try{
+    const sql_con= await client.connect();
+    const sql_delete_all='DELETE  FROM "customerscredentials" ';
+    const delete_res = await sql_con.query(sql_delete_all);
+    sql_con.release();
+    return delete_res;
+  }catch(e:unknown){
+    throw new Error(`Customer cannot be deleted all customers credential.${e}`)
+  }
 }
+
+*/
 function customerscredentials() {
     return {
         createcustomercredential,
@@ -175,8 +177,8 @@ function customerscredentials() {
         showallcustomercredentail,
         updatecustomercredentailemail,
         updatecustomercredentailpassword,
-        deletecustomercredential,
-        delete_allcustomercredential
+        deletecustomercredential
+        //delete_allcustomercredential
     };
 }
 exports.customerscredentials = customerscredentials;

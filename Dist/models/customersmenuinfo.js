@@ -82,27 +82,28 @@ async function deletecustomerinfo(id, _credentialid) {
         throw new Error(`Customer info cannot be deleted ${id}:${e}.`);
     }
 }
-// Delete all
-async function delete_allcustomerinfo(_credentialid) {
-    try {
-        const sql_con = await database_1.default.connect();
-        const sql_delete_all = 'DELETE FROM "customersmenuinfo" ';
-        const delete_res = await sql_con.query(sql_delete_all);
-        sql_con.release();
-        return delete_res;
-    }
-    catch (e) {
-        throw new Error(`Customer cannot be deleted all customers info.${e}`);
-    }
+/*
+  // Delete all
+async function delete_allcustomerinfo(_credentialid:Number): Promise<customerinfo> {
+  try{
+    const sql_con= await client.connect();
+    const sql_delete_all='DELETE FROM "customersmenuinfo" ';
+    const delete_res = await sql_con.query(sql_delete_all);
+    sql_con.release();
+    return delete_res;
+  }catch(e:unknown){
+    throw new Error(`Customer cannot be deleted all customers info.${e}`)
+  }
 }
+*/
 function customersmenuinfo() {
     return {
         createcustomerinfo,
         showcustomerinfo,
         showallcustomerinfo,
         updatecustomerinfo,
-        deletecustomerinfo,
-        delete_allcustomerinfo
+        deletecustomerinfo
+        //delete_allcustomerinfo
     };
 }
 exports.customersmenuinfo = customersmenuinfo;

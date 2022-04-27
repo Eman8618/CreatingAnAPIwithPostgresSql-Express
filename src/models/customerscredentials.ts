@@ -173,6 +173,7 @@ async function deletecustomercredential(id:number): Promise<customercredential> 
     throw new Error(`Customer cannot be deleted ${id}.${e}`)
   }
 }
+/*
 // Delete all
 async function delete_allcustomercredential(_id:Number): Promise<customercredential> {
   try{
@@ -186,7 +187,7 @@ async function delete_allcustomercredential(_id:Number): Promise<customercredent
   }
 }
 
-
+*/
 export function customerscredentials() {
   return {
     createcustomercredential,
@@ -196,7 +197,7 @@ export function customerscredentials() {
     showallcustomercredentail,
     updatecustomercredentailemail,
     updatecustomercredentailpassword,
-    deletecustomercredential,
-    delete_allcustomercredential
+    deletecustomercredential
+    //delete_allcustomercredential
     };
 }

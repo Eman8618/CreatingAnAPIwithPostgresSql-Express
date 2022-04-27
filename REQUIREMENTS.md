@@ -8,6 +8,10 @@ TABLE customerscredentials (
     username VARCHAR(100) UNIQUE NOT NULL,
     password_di VARCHAR(200)  UNIQUE NOT NULL
 );
+##
+|id |email |username|password_di|
+|---|------|--------|-----------|
+|   |      |        |           |
 ## customersmenuinfo table
 TABLE customersmenuinfo(
   id SERIAL PRIMARY KEY ,
@@ -18,6 +22,12 @@ TABLE customersmenuinfo(
   customercountry VARCHAR(50) NOT NULL,
   nationalid VARCHAR(50)  NULL
 );
+##
+|id |credentialid |customername|mobile|addresses|customercountry|nationalid|
+|---|-------------|------------|------|---------|---------------|----------|
+|   |             |            |      |         |               |          |     
+
+
 ## productsmenuinfo table
 CREATE TABLE  productsmenuinfo(
   id SERIAL PRIMARY KEY,
@@ -27,16 +37,35 @@ CREATE TABLE  productsmenuinfo(
   category VARCHAR(50) NOT NULL,
   productioncountry VARCHAR(50) NOT NULL 
 );
+##
+|id |credentialid |productname|price|category|productioncountry|
+|---|-------------|-----------|-----|--------|-----------------|
+|   |             |           |     |        |                 |            
+
 ## ordersmenuinfo table
-TABLE ordersmenuinfo(
+CREATE TABLE ordersmenuinfo(
+  id SERIAL PRIMARY KEY,
+  credentialid INTEGER REFERENCES customerscredentials(id) NOT NULL,
+  purchasedate DATE  NULL, 
+  activeorder BOOLEAN NOT NULL,
+  customerid INTEGER REFERENCES customersmenuinfo(id)  NULL
+);
+##
+|id |credentialid |purchasedate|activeorder|customerid|
+|---|-------------|------------|-----------|----------|
+|   |             |            |           |          |
+## orderproductscart table
+CREATE TABLE  orderproductscart(
   id SERIAL PRIMARY KEY,
   credentialid INTEGER REFERENCES customerscredentials(id)  NULL,
-  orderquantity NUMERIC(12) NOT NULL,
-  purchasedate DATE  NULL, 
-  onlinepayment BOOLEAN NOT NULL,
-  customerid INTEGER REFERENCES customersmenuinfo(id)  NULL,
-  productid  INTEGER REFERENCES productsmenuinfo(id)  NULL
+  ordercartid  INTEGER REFERENCES ordersmenuinfo(id) NOT NULL,
+  productid  INTEGER REFERENCES productsmenuinfo(id)  NOT NULL,
+  productquantity NUMERIC(12) NOT NULL
 );
+## 
+|id |credentialid |ordercartid|productid|productquantity|
+|---|-------------|-----------|---------|---------------|
+|   |             |           |         |               |
 ### Each table of them  contain id as serial number && contain credentialid that reference to 
 ### the credential of customer to can create or update or delete product or order
 ### Order table have also id of the product and id of customer 
@@ -88,16 +117,17 @@ http://localhost:3000/productsmenuinfo/credentialid/:credentialid/productinfoid/
 #### For delete product  info with id using delete
 http://localhost:3000/productsmenuinfo/credentialid/:credentialid/productinfoid/:id
 
-
 ## For Order menu info routes
 #### For create new order menu info using post request
-http://localhost:3000/ordersmenuinfo/credentialid/:credentialid/orderquantity/:orderquantity/purchasedate/:purchasedate/activeorder/:activeorder/customerid/:customerid/productid/:productid
+http://localhost:3000/ordersmenuinfo/credentialid/:credentialid/purchasedate/:purchasedate/activeorder/:activeorder/customerid/:customerid
+#### For Add new product to active order usig post request
+http://localhost:3000/orderproductlist/ordercartid/:ordercartid/productid/:productid/productquantity/:productquantity
+#### For Show order product list for active order using get request
+http://localhost:3000/orderproductlist/id/:id
 #### For show the order info with id using get request
 http://localhost:3000/ordersmenuinfo/id/:id
 #### For show all order info using get request
 http://localhost:3000/ordersmenuinfo
-#### For Update  order quantity using put request
-http://localhost:3000/ordersmenuinfo/credentialid/:credentialid/orderid/:id/orderquantity/:orderquantity
 #### For delete order info with id
 http://localhost:3000/ordersmenuinfo/credentialid/:credentialid/orderid/:id
 

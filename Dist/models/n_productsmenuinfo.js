@@ -84,27 +84,27 @@ async function deleteproductinfo(id, _credentialid) {
         throw new Error(`Customer info cannot be deleted ${id}:${e}.`);
     }
 }
-// Delete all products info 
-async function delete_allproductinfo(_credentialid) {
-    try {
-        const sql_con = await database_1.default.connect();
-        const sql_delete_all = 'DELETE  FROM "productsmenuinfo" ';
-        const delete_res = await sql_con.query(sql_delete_all);
-        sql_con.release();
-        return delete_res;
-    }
-    catch (e) {
-        throw new Error(`Customer cannot be deleted all products info.${e}`);
-    }
-}
+/*
+// Delete all products info
+async function delete_allproductinfo(_credentialid:Number): Promise<productinfo> {
+  try{
+    const sql_con= await client.connect();
+    const sql_delete_all='DELETE  FROM "productsmenuinfo" ';
+    const delete_res = await sql_con.query(sql_delete_all);
+    sql_con.release();
+    return delete_res;
+  }catch(e:unknown){
+    throw new Error(`Customer cannot be deleted all products info.${e}`)
+  }
+}*/
 function productsmenuinfo() {
     return {
         createproductinfo,
         showproductinfo,
         updateproductinfo,
         showallproductinfo,
-        deleteproductinfo,
-        delete_allproductinfo
+        deleteproductinfo
+        //  delete_allproductinfo    
     };
 }
 exports.productsmenuinfo = productsmenuinfo;

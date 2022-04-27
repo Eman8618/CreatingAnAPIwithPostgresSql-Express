@@ -92,7 +92,7 @@ async function createcustomerinfo(credentialid:Number,customername:String,mobile
       throw new Error(`Customer info cannot be deleted ${id}:${e}.`)
     }
   }
-
+/*
   // Delete all
 async function delete_allcustomerinfo(_credentialid:Number): Promise<customerinfo> {
   try{
@@ -105,15 +105,15 @@ async function delete_allcustomerinfo(_credentialid:Number): Promise<customerinf
     throw new Error(`Customer cannot be deleted all customers info.${e}`)
   }
 }
-
+*/
   export function customersmenuinfo() {
     return {
       createcustomerinfo,
       showcustomerinfo,
       showallcustomerinfo,
       updatecustomerinfo,
-      deletecustomerinfo,
-      delete_allcustomerinfo
+      deletecustomerinfo
+      //delete_allcustomerinfo
       };
   }
 
